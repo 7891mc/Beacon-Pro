@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beacon 管理后台</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M12 2L8 6v4l-4 4v6h16v-6l-4-4V6l-4-4z' fill='%23111' opacity='.15'/><path d='M12 2L8 6v4l-4 4v6h16v-6l-4-4V6l-4-4z' stroke='%23111' stroke-width='1.5' stroke-linejoin='round'/><path d='M12 2v6' stroke='%23111' stroke-width='1.5' stroke-linecap='round'/><rect x='10' y='12' width='4' height='4' rx='.5' fill='%23111' opacity='.5'/></svg>">
+    <!-- Element Plus CSS -->
+    <link rel="stylesheet" href="vendor/css/element-plus.css">
+    <!-- wangEditor CSS -->
+    <link rel="stylesheet" href="vendor/css/wangeditor.css">
+    <!-- 本地 CSS -->
+    <link rel="stylesheet" href="css/admin.css?v=13">
+</head>
+<body>
+    <div id="app">
+        <template v-if="!store.token">
+            <login-page @login-success="onLoginSuccess"></login-page>
+        </template>
+        <template v-else>
+            <app-layout>
+                <component :is="currentPage"></component>
+            </app-layout>
+        </template>
+    </div>
+
+    <!-- Local Dependencies -->
+    <script src="vendor/js/vue.global.prod.js"></script>
+    <script src="vendor/js/element-plus.min.js"></script>
+    <script src="vendor/js/element-plus-zh-cn.min.js"></script>
+    <script src="vendor/js/element-plus-icons.min.js"></script>
+    <script src="vendor/js/axios.min.js"></script>
+    <script src="vendor/js/echarts.min.js"></script>
+    <script src="vendor/js/wangeditor.min.js"></script>
+    <script src="vendor/js/Sortable.min.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/stores.js"></script>
+    <script src="js/components/AppLayout.js"></script>
+    <script src="js/components/AppSidebar.js"></script>
+    <script src="js/components/AppHeader.js"></script>
+    <script src="js/components/AppPagination.js"></script>
+    <script src="js/components/AppStatusTag.js"></script>
+    <script src="js/components/AppSearchBar.js"></script>
+    <script src="js/components/AppImageUpload.js"></script>
+    <script src="js/components/AppRichEditor.js"></script>
+    <script src="js/pages/login.js"></script>
+    <script src="js/pages/dashboard.js"></script>
+    <script src="js/pages/server-config.js"></script>
+    <script src="js/pages/gallery.js"></script>
+    <script src="js/pages/posts.js"></script>
+    <script src="js/pages/post-edit.js"></script>
+    <script src="js/pages/comments.js"></script>
+    <script src="js/pages/whitelist.js"></script>
+    <script src="js/pages/users.js"></script>
+    <script src="js/pages/site-settings.js"></script>
+    <script src="js/pages/feature-toggle.js"></script>
+    <script src="js/pages/friend-links.js"></script>
+    <script src="js/pages/update.js"></script>
+    <script src="js/pages/theme-market.js?v=13"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+# ============================================================
+# Minecraft Server Site - Nginx 配置示例
+# 将此内容粘贴到宝塔站点的「伪静态」配置中
+# ============================================================
+
+# API 路由
+location /api/ {
+    try_files $uri /api/index.php?$args;
+}
+
+# 后台 API 路由
+location /admin/api/ {
+    try_files $uri /admin/api/index.php?$args;
+}
+
+# 上传文件（直接访问，缓存7天）
+location /uploads/ {
+    expires 7d;
+    add_header Cache-Control "public, immutable";
+}
+
+# 后台面板静态资源
+location /admin/ {
+    try_files $uri $uri/ /admin/index.html;
+}
+
+# 主题静态资源
+location /themes/ {
+    expires 7d;
+}
+
+# 安装向导
+location = /install.php {
+    # 直接访问
+}
+
+# PHP 处理
+location ~ \.php$ {
+    fastcgi_pass unix:/tmp/php-cgi-81.sock;  # 根据实际 PHP 版本修改
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+}
+
+# 默认走前端入口
+location / {
+    try_files $uri $uri/ /index.php?$args;
+}
+
+# 禁止访问隐藏文件和配置文件
+location ~ /\.(ht|git) {
+    deny all;
+}
+
+location = /config.php {
+    deny all;
+}
+
+location /core/ {
+    deny all;
+}
+
+location /cache/ {
+    deny all;
+}
